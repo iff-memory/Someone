@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Someone Special ✨</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400&family=Dancing+Script:wght@500&display=swap" rel="stylesheet">
+
+<style>
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  font-family:'Poppins',sans-serif;
+  background:linear-gradient(180deg,#ffe4ec,#ffb6c1);
+  color:#4a2e2e;
+  overflow-x:hidden;
+}
+
+section{
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:40px 20px;
+}
+
+.card{
+  max-width:760px;
+  background:rgba(255,255,255,0.65);
+  backdrop-filter:blur(16px);
+  border-radius:28px;
+  padding:42px;
+  text-align:center;
+  box-shadow:0 0 45px rgba(255,255,255,0.9);
+}
+
+h1{
+  font-family:'Playfair Display',serif;
+  font-size:2.5em;
+}
+
+p{
+  font-size:1.15em;
+  line-height:1.9;
+  white-space:pre-line;
+}
+
+button{
+  margin-top:25px;
+  padding:14px 34px;
+  border:none;
+  border-radius:30px;
+  background:#ff7a9e;
+  color:white;
+  font-size:1em;
+  cursor:pointer;
+}
+
+/* Name reveal */
+.name{
+  font-family:'Playfair Display',serif;
+  font-size:3em;
+  opacity:0;
+  animation:reveal 2.5s forwards;
+}
+@keyframes reveal{
+  to{opacity:1;letter-spacing:.15em;}
+}
+
+/* Emoji Gate */
+.emojis{
+  display:flex;
+  justify-content:center;
+  gap:22px;
+  margin-top:30px;
+  font-size:2.7em;
+}
+.emojis span{cursor:pointer;}
+
+/* Shake */
+.shake{animation:shake .4s;}
+@keyframes shake{
+  0%{transform:translateX(0)}
+  25%{transform:translateX(-6px)}
+  50%{transform:translateX(6px)}
+  75%{transform:translateX(-6px)}
+  100%{transform:translateX(0)}
+}
+
+/* Denied */
+.denied{background:#000;color:#fff;}
+
+/* Hearts */
+.heart{
+  position:fixed;
+  bottom:-30px;
+  font-size:18px;
+  opacity:.4;
+  animation:floatUp linear infinite;
+  pointer-events:none;
+}
+@keyframes floatUp{
+  from{transform:translateY(0);opacity:0;}
+  to{transform:translateY(-120vh);opacity:.5;}
+}
+
+/* Confession */
+.confession{
+  font-family:'Dancing Script',cursive;
+  font-size:1.4em;
+}
+</style>
+</head>
+
+<body>
+
+<audio id="bgm" src="music.mp3" loop></audio>
+
+<!-- 🔐 PASSWORD -->
+<section id="gate">
+  <div class="card" id="gateCard">
+    <h1>Choose who you are 🤍</h1>
+    <p>Sirf ek hi sahi hai…</p>
+    <div class="emojis">
+      <span onclick="check('🐼')">🐼</span>
+      <span onclick="check('🐈')">🐈</span>
+      <span onclick="check('🐐')">🐐</span>
+      <span onclick="check('🧸')">🧸</span>
+      <span onclick="check('🦄')">🦄</span>
+    </div>
+  </div>
+</section>
+
+<!-- ❌ DENIED -->
+<section id="denied" class="denied" style="display:none;">
+  <div class="card" style="background:rgba(0,0,0,.7);">
+    <h1>No… you are wrong 🖤</h1>
+    <p id="count">Refreshing in 5 seconds…</p>
+  </div>
+</section>
+
+<!-- 💗 FOR SOMEONE SPECIAL -->
+<section id="start" style="display:none;">
+  <div class="card">
+    <h1>For Someone Special 💗</h1>
+    <p id="introText">Janna nahi chahogi kaun? 👀</p>
+
+    <div id="nameBox" style="display:none;">
+      <div class="name" id="personName"></div>
+      <p>This one is just for you 🤍</p>
+    </div>
+
+    <button id="revealBtn" onclick="revealName()">Reveal 💗</button>
+    <button id="startBtn" onclick="go('p1')" style="display:none;">Start ✨</button>
+  </div>
+</section>
+
+<!-- 💗 SHEETS -->
+<section id="p1" style="display:none;">
+<div class="card">
+<h1>Ek Naya Saal ✨</h1>
+<p>
+Kuch saal sirf tareekh badalte hain,
+aur kuch saal dil ke andar kuch mehsoos karwa jaate hain 🌙
+
+2025… thoda zyada khaas lag raha hai.
+</p>
+<button onclick="go('p2')">Aage ➝</button>
+</div></section>
+
+<section id="p2" style="display:none;">
+<div class="card">
+<h1>Hey <span id="personName2"></span>… 💕</h1>
+<p>
+Tum woh ehsaas ho
+jo bina awaaz ke bhi
+dil tak pahunch jaata hai 💗
+
+Thodi si baat,
+thodi si muskurahat,
+aur sab theek lagne lagta hai.
+</p>
+<button onclick="go('p3')">Next 🌸</button>
+</div></section>
+
+<section id="p3" style="display:none;">
+<div class="card">
+<h1>Bas Tum 💗</h1>
+<p>
+Tumhare saath waqt
+hamesha thoda jaldi guzar jaata hai 😌
+
+Shayad wajah tum ho…
+ya shayad bas tumhara hona hi kaafi hai.
+</p>
+<button onclick="go('p4')">Next ✨</button>
+</div></section>
+
+<section id="p4" style="display:none;">
+<div class="card">
+<h1>Ek Pakka Wada</h1>
+<p>
+Main hamesha tumhare saath rahunga --
+sirf aasaan dinon mein nahi,
+balki har mushkil mein bhi.
+
+Tumhari care,
+tumhari respect,
+aur tumhari khushi
+mere liye hamesha sabse upar rahegi.
+
+Haath kabhi chhodne ka sawaal hi nahi.
+</p>
+<button onclick="go('p5')">🤍</button>
+</div></section>
+
+<section id="p5" style="display:none;">
+<div class="card confession">
+<h1>Confession</h1>
+<p>
+I don't know kese kese m pagal sa ladka
+jisko nhi matlab tha kisi se..
+Ho bas apne hi kush rehta tha 
+
+Kese koi mere liye itna important ho gya
+mujhe hairat hoti h
+but jb tumhe dekhta hu to haa yaqeen ho jata h
+iske liye to kuch bhi kr lo kam hi h
+
+Agar m ek line m define kru to....
+
+Wese ye alfaz kam hi hoge
+but fir bhi
+
+<strong>mitti da banda tu ta Pari</strong>
+</p>
+<button onclick="go('p6')">💗</button>
+</div></section>
+
+<section id="p6" style="display:none;">
+<div class="card">
+<h1>2026 & Us ✨</h1>
+<p>
+Saal badalte rahenge,
+duniya apni raah chalegi…
+Par har naye saal mein bhi,
+meri choice sirf tum hi rahogi 💕
+
+Happy New Year 🤍
+-- Always yours,
+Your <span id="signature"></span>
+</p>
+</div></section>
+
+<script>
+/* ====== CUSTOM SETTINGS (CHANGE ONLY HERE) ====== */
+const SETTINGS = {
+  personName: "Gul",
+  signatureName: "Ajmal",
+  passwordEmoji: "🐼"
+};
+/* ============================================== */
+
+const audio=document.getElementById("bgm");
+document.getElementById("personName").textContent=SETTINGS.personName;
+document.getElementById("personName2").textContent=SETTINGS.personName;
+document.getElementById("signature").textContent=SETTINGS.signatureName;
+
+function check(choice){
+  if(choice===SETTINGS.passwordEmoji){
+    audio.play();
+    show('start');
+  }else{
+    document.getElementById("gateCard").classList.add("shake");
+    setTimeout(()=>{
+      show('denied');
+      startCountdown();
+    },400);
+  }
+}
+
+function revealName(){
+  document.getElementById("introText").style.display="none";
+  document.getElementById("revealBtn").style.display="none";
+  document.getElementById("nameBox").style.display="block";
+  document.getElementById("startBtn").style.display="inline-block";
+}
+
+function show(id){
+  document.querySelectorAll("section").forEach(s=>s.style.display="none");
+  document.getElementById(id).style.display="flex";
+}
+
+function go(id){ show(id); }
+
+function startCountdown(){
+  let n=5;
+  const c=document.getElementById("count");
+  const t=setInterval(()=>{
+    n--;
+    c.textContent=`Refreshing in ${n} seconds…`;
+    if(n<=0){
+      clearInterval(t);
+      location.reload();
+    }
+  },1000);
+}
+
+/* Hearts */
+setInterval(()=>{
+  const h=document.createElement("div");
+  h.className="heart";
+  h.innerHTML="💖";
+  h.style.left=Math.random()*100+"vw";
+  h.style.animationDuration=(Math.random()*6+10)+"s";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),16000);
+},1500);
+</script>
+
+</body>
+</html>
